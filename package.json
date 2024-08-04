@@ -1,6 +1,6 @@
 {
   "name": "beech-auth0",
-  "version": "0.1.22",
+  "version": "0.1.0",
   "description": "Beech authentication policy",
   "keywords": [
     "auth",
