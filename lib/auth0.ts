@@ -1,4 +1,4 @@
-const Cryptr = require("cryptr");
+const CryptoJS = require("crypto-js");
 const md5 = require("md5");
 
 /**
@@ -6,11 +6,12 @@ const md5 = require("md5");
  * @param timing UNIX Timestamp
  * @param advanced_key String
  * @param callback (error, response)
- * 
+ *
  */
-function Hash(timing, advanced_key, cb) {
-  const crypIt = new Cryptr(advanced_key.toString(), { encoding: "base64url", pbkdf2Iterations: 200, saltLength: 10, });
-  cb(crypIt.encrypt(timing.concat(md5(advanced_key).toString())));
+function Auth0(timing, advanced_key, cb) {
+  const b64 = CryptoJS.AES.encrypt(timing, md5(advanced_key)).toString();
+  const e64 = CryptoJS.enc.Base64.parse(b64);
+  cb(e64.toString(CryptoJS.enc.Hex));
 }
 
-export { Hash }
+export { Auth0 };
